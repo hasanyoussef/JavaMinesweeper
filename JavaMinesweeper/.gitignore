@@ -1,0 +1,8 @@
+.metadata
+
+# Пусть бинарники будут, кому надо - удалят
+## Package Files ##
+# *.class
+# *.jar
+# *.war
+# *.ear
