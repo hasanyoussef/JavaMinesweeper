@@ -168,7 +168,7 @@ public class Minesweeper extends JFrame implements Runnable, MinesField, MouseLi
 	
 	/*
 	 * 
-	 * Отработка мышиных событий на кнопках
+	 * Отработка событий мыши на кнопках
 	 * 
 	 */
 	@Override
