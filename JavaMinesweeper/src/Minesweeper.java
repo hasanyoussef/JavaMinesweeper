@@ -21,23 +21,40 @@ public class Minesweeper extends JFrame implements Runnable, MinesField, MouseLi
 	public static JFrame frame;
 
 	
+	public static int DEFAULT_WIDTH = 600;
+	public static int DEFAULT_HEIGHT = 600;
+	public static String DEFAULT_TITLE = "My Java Mines";
 	
 	public Minesweeper(){
 		setSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
 		setTitle(DEFAULT_TITLE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Minesweeper.frame = this;
+		
+		ICON_CELL_BOMB = new ImageIcon( getClass().getResource("res/cell_bomb.gif") );
+		ICON_CELL_BOMBED = new ImageIcon( getClass().getResource("res/cell_bombed.gif") );
+		ICON_CELL_FLAGGED = new ImageIcon( getClass().getResource("res/cell_flagged.gif") );
+		ICON_CELL_FLAGGED_ERROR = new ImageIcon( getClass().getResource("res/cell_flagged_error.gif") );
 	}
-	public static int DEFAULT_WIDTH = 600;
-	public static int DEFAULT_HEIGHT = 600;
-	public static String DEFAULT_TITLE = "My Java Mines";
 	
 	/*
 	 * (non-Javadoc)
 	 * Элементы интерфейса
 	 */
-	public JPanel panelInfo, panelGame;
-	public JButton buttonNewGame;
+	private JPanel panelInfo, panelGame;
+	private JButton buttonNewGame;
+	
+	private ImageIcon ICON_CELL_BOMB;
+	private ImageIcon ICON_CELL_BOMBED;
+	private ImageIcon ICON_CELL_FLAGGED;
+	private ImageIcon ICON_CELL_FLAGGED_ERROR;
+	
+	private MinesManager minesManager;
+	private ArrayList<ArrayList<JButtonCell>> buttonCells = new ArrayList<ArrayList<JButtonCell>>();
+	
+	public static Color[] colorsNear = {
+		Color.BLUE, Color.GREEN, Color.RED, Color.BLUE, Color.YELLOW, Color.PINK, Color.CYAN, Color.BLACK
+	};
 	
 	@Override
 	public void run() {
@@ -75,16 +92,6 @@ public class Minesweeper extends JFrame implements Runnable, MinesField, MouseLi
 	public void newGame(){
 		minesManager.newGame();
 	}
-	
-	private MinesManager minesManager;
-	private ArrayList<ArrayList<JButtonCell>> buttonCells = new ArrayList<ArrayList<JButtonCell>>();
-	
-	public static ImageIcon ICON_CELL_FLAGGED = new ImageIcon("//home//assargin//workspace//JavaMines//bin//cell_flagged.gif");
-	public static ImageIcon ICON_CELL_BOMBED = new ImageIcon("//home//assargin//workspace//JavaMines//bin//cell_bombed.gif");
-	public static Color[] colorsNear = {
-		Color.BLUE, Color.GREEN, Color.RED, Color.BLUE, Color.YELLOW, Color.PINK, Color.CYAN, Color.BLACK
-	};	
-	
 	
 	private JButtonCell getButtonCell(int x, int y) throws IndexOutOfBoundsException{
 		if( y >= buttonCells.size() )
